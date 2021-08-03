@@ -1,4 +1,4 @@
-const customers = [
+export const customers = [
   {
     id: 1,
     system: "Arterra",

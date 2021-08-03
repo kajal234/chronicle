@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getDropDownValues, getCustormerData } from "../../Customer.js";
+import {
+  getDropDownValues,
+  getCustormerData,
+  customers as cust,
+} from "../../Customer.js";
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 const Card = () => {
   const [databaseValue, setDatabaseValue] = useState("arterra");
@@ -27,6 +34,11 @@ const Card = () => {
       const customersData = getCustormerData(selectValue, searchInput.input);
       setCustomers(customersData);
     }
+  };
+  const defaultColDef = {
+    sortable: true,
+    flex: 1,
+    filter: true,
   };
 
   return (
@@ -132,39 +144,35 @@ const Card = () => {
             </div>
           </div>
         </div>
-        {customers.length > 0 ? (
-          <table className="table table-striped bg-dark text-white mt-4">
-            <thead>
-              <tr>
-                <td>System</td>
-                <td>Customer Name</td>
-                <td>Account Number</td>
-                <td>CoreAccount Number</td>
-                <td>Contact Phone</td>
-                <td>Emailaddress</td>
-                <td>MDN</td>
-                <td>IMEI</td>
-              </tr>
-            </thead>
-            <tbody className="bg-light">
-              {customers.map((customer) => (
-                <tr>
-                  <td>{customer.system}</td>
-                  <td>{customer.customerName}</td>
-                  <td>{customer.accountNumber}</td>
-                  <td>{customer.coreAccountNumber}</td>
-                  <td>{customer.contactPhone}</td>
-                  <td>{customer.emailaddress}</td>
-                  <td>{customer.mdn}</td>
-                  <td>{customer.imei}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : null}
+        <div
+          className="ag-theme-alpine mt-4"
+          style={{ width: "100%", height: "500px" }}
+        >
+          {customers.length > 0 ? (
+            <AgGridReact
+              rowData={customers}
+              defaultColDef={defaultColDef}
+              columnDefs={Object.keys(customers[0])
+                .filter((key) => key != "id")
+                .map((key) => {
+                  return {
+                    headerName: convertCamelCaseToWord(key),
+                    field: key,
+                    filter: true,
+                    sortIndex: true,
+                  };
+                })}
+            />
+          ) : null}
+        </div>
       </div>
     </>
   );
 };
 
 export default Card;
+
+const convertCamelCaseToWord = (word) => {
+  const result = word[0].toUpperCase() + word.substr(1);
+  return result.charAt(0).toUpperCase() + result.slice(1);
+};
