@@ -1,0 +1,37 @@
+{
+  "customers":[
+  {
+    "id": 1,
+    "system": "Arterra",
+    "customerName": "John Doe",
+    "accountNumber": 12345678,
+    "coreAccountNumber": 56423,
+    "contactPhone": "(91)234-4567",
+    "emailaddress": "john@capgemini.com",
+    "mdn": 9809,
+    "imei": 7564
+  },
+  {
+    "id": 2,
+    "system": "Arterra",
+    "customerName": "Mack Ban",
+    "accountNumber": 23456852,
+    "coreAccountNumber": 98756,
+    "contactPhone": "(813)567-23456",
+    "emailaddress": "john@capgemini.com",
+    "mdn": 9809,
+    "imei": 7564
+  },
+  {
+    "id": 3,
+    "system": "Arterra",
+    "customerName": "Jack Donaldo",
+    "accountNumber": 56789654,
+    "coreAccountNumber": 45678,
+    "contactPhone": "(674)789-12345",
+    "emailaddress": "john@capgemini.com",
+    "mdn": 9809,
+    "imei": 7564
+  }
+]
+}
